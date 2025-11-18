@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SARIGÖZOĞLU 1000T Pres Dokümanları</title>
+    <style>
+        body { margin: 0; padding: 15px; font-family: Arial; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 15px; border-radius: 5px; }
+        .header { text-align: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 3px solid #e74c3c; }
+        .pres-info { background: #2c3e50; color: white; padding: 12px; text-align: center; margin-bottom: 20px; font-weight: bold; border-radius: 3px; }
+        .layout { display: grid; grid-template-columns: 300px 1fr; gap: 20px; height: 75vh; }
+        .pdf-list { background: #f8f9fa; padding: 15px; overflow-y: auto; border: 1px solid #ddd; border-radius: 5px; }
+        .pdf-item { padding: 12px; margin: 8px 0; background: white; border: 1px solid #ddd; cursor: pointer; border-left: 4px solid #3498db; border-radius: 3px; }
+        .pdf-item:hover { background: #e3f2fd; }
+        .pdf-item.active { background: #ffebee; border-left-color: #e74c3c; font-weight: bold; }
+        .category { margin-bottom: 25px; }
+        .category-title { font-weight: bold; margin-bottom: 12px; color: #2c3e50; font-size: 16px; padding-bottom: 5px; border-bottom: 2px solid #3498db; }
+        .pdf-viewer { background: #f8f9fa; padding: 0; display: flex; flex-direction: column; border: 1px solid #ddd; border-radius: 5px; }
+        .viewer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding: 15px; background: white; border-bottom: 1px solid #ddd; }
+        .current-pdf { font-weight: bold; font-size: 18px; color: #2c3e50; }
+        .download-btn { background: #27ae60; color: white; padding: 8px 15px; text-decoration: none; border-radius: 3px; font-size: 14px; }
+        iframe { border: none; background: white; flex-grow: 1; border-radius: 0 0 5px 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏭 SARIGÖZOĞLU 1000T Presi</h1>
+            <p>Teknik Dokümanlar ve Şemalar</p>
+        </div>
+        
+        <div class="pres-info">1000 Ton Hidrolik Pres - Model: HİDROMODE HIP</div>
+        
+        <div class="layout">
+            <!-- Sol Menü - PDF Listesi -->
+            <div class="pdf-list">
+                <div class="category">
+                    <div class="category-title">Hidrolik Sistem</div>
+                    <div class="pdf-item active" onclick="openPdf('HİDROMODE HIP Ana Şema', 'hidromode-hip.pdf')">
+                        📊 HİDROMODE HIP Ana Şema
+                    </div>
+                    <div class="pdf-item" onclick="openPdf('RevTech Dokümanı', 'revtech.pdf')">
+                        🔧 RevTech Dokümanı
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <div class="category-title">Elektrik Sistem</div>
+                    <div class="pdf-item" onclick="openPdf('Kontrol Panosu Şeması', 'kontrol-seması.pdf')">
+                        🔌 Kontrol Panosu Şeması
+                    </div>
+                    <div class="pdf-item" onclick="openPdf('Güç Dağıtım Şeması', 'guc-dagitim.pdf')">
+                        ⚡ Güç Dağıtım Şeması
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <div class="category-title">Arıza ve Bakım</div>
+                    <div class="pdf-item" onclick="openPdf('Arıza Kodları', 'ariza-kodlari.pdf')">
+                        🚨 Arıza Kodları
+                    </div>
+                    <div class="pdf-item" onclick="openPdf('Bakım Talimatları', 'bakim.pdf')">
+                        🛠️ Bakım Talimatları
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sağ Taraf - PDF Görüntüleyici -->
+            <div class="pdf-viewer">
+                <div class="viewer-header">
+                    <div class="current-pdf" id="currentPdfTitle">HİDROMODE HIP Ana Şema</div>
+                    <a href="hidromode-hip.pdf" class="download-btn" id="downloadLink" download>📥 PDF İndir</a>
+                </div>
+                <iframe id="pdfViewer" src="hidromode-hip.pdf"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openPdf(title, pdfFilename) {
+            document.getElementById('pdfViewer').src = pdfFilename;
+            document.getElementById('downloadLink').href = pdfFilename;
+            document.getElementById('currentPdfTitle').textContent = title;
+            
+            document.querySelectorAll('.pdf-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
